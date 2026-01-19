@@ -1,6 +1,6 @@
 //
 // Created by Oleki on 19.01.2026.
-//
+// reference: https://github.com/SFML/SFML/wiki/Source%3A-Draw-Rounded-Rectangle
 
 #ifndef USB_INTERFACE_PROGRAMMING_ROUNDEDRECTANGLESHAPE_H
 #define USB_INTERFACE_PROGRAMMING_ROUNDEDRECTANGLESHAPE_H
