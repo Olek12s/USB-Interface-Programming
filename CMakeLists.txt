@@ -14,7 +14,9 @@ FetchContent_MakeAvailable(SFML)
 
 add_executable(main src/main.cpp
         src/Renderer.cpp
-        src/Renderer.h)
+        src/Renderer.h
+        src/RoundedRectangleShape.cpp
+        src/RoundedRectangleShape.h)
 target_compile_features(main PRIVATE cxx_std_17)
 target_link_libraries(main PRIVATE SFML::Graphics)
 

@@ -1,6 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+#include <algorithm>
+#include <cmath>
+
+#include "RoundedRectangleShape.h"
+
+using namespace std;
 
 /**
  *  Compares aspect ratio of the current window to the aspect ratio of the view
@@ -57,8 +63,6 @@ int main()
     view.setCenter(sf::Vector2f(vwX/2, vwY/2));
     view = getLetterboxView(view, vwX, vwY);
 
-
-
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
@@ -97,6 +101,12 @@ int main()
         shape3.setFillColor(sf::Color(100, 250, 50));
         window.draw(shape3);
 
+        float rrW = 150;
+        float rrH = 150;
+        sf::RoundedRectangleShape roundedRect({rrW,rrH}, 10,10);
+        roundedRect.setPosition({vwX/2 - rrW/2, vwY/2 - rrH/2});
+        roundedRect.setFillColor(sf::Color::Red);
+        window.draw(roundedRect);
 
         window.display();
     }
