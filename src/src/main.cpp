@@ -5,6 +5,7 @@
 #include <cmath>
 
 #include "../include/RoundedRectangleShape.h"
+#include "../include/Game.h"
 
 using namespace std;
 
@@ -50,6 +51,11 @@ sf::View getLetterboxView(sf::View view, float windowWidth, float windowHeight) 
 
 int main()
 {
+    Game game;
+    //game.start();
+    game.mainLoop();
+
+
     constexpr unsigned int initResX = 1366;
     constexpr unsigned int initResY = 768;
     constexpr float vwX = 1366;

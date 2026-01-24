@@ -3,3 +3,7 @@
 //
 
 #include "../include/Updater.h"
+
+void Updater::globalTick() {
+
+}

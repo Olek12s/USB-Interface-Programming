@@ -3,3 +3,7 @@
 //
 
 #include "../include/Renderer.h"
+
+void Renderer::globalRender() {
+
+}

@@ -3,6 +3,8 @@
 //
 
 #include "../include/Game.h"
+#include "../include/Updater.h"
+#include "../include/Renderer.h"
 #include <SFML/Graphics.hpp>
 #include <chrono>
 #include <iostream>
@@ -47,19 +49,16 @@ void Game::mainLoop()
         {
             if (pending)
             {
-                // input.listen();
-                // updater.tick();
+                //input.listen();
+                 Updater::globalTick();
             }
 
             ticksThisSecond++;
             accumulator -= 1.0;
         }
-
-
         window.clear();
-
         // draw
-
+        Renderer::globalRender();
         window.display();
         framesThisSecond++;
 

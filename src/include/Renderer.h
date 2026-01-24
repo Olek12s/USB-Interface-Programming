@@ -8,6 +8,7 @@
 
 class Renderer {
 public:
+    static void globalRender();
     static void renderBall();
     static void rendezBlock();
     static void renderPaddle();
