@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <cmath>
 
-#include "RoundedRectangleShape.h"
+#include "../include/RoundedRectangleShape.h"
 
 using namespace std;
 
@@ -52,8 +52,8 @@ int main()
 {
     constexpr unsigned int initResX = 1366;
     constexpr unsigned int initResY = 768;
-    constexpr float vwX = 800;
-    constexpr float vwY = 600;
+    constexpr float vwX = 1366;
+    constexpr float vwY = 768;
 
     auto window = sf::RenderWindow(sf::VideoMode({initResX, initResY}), "CMake SFML Project");
     window.setFramerateLimit(60);

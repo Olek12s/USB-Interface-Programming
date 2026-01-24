@@ -2,7 +2,7 @@
 // Created by Oleki on 19.01.2026.
 //
 
-#include "RoundedRectangleShape.h"
+#include "../include/RoundedRectangleShape.h"
 #include <cmath>
 
 namespace sf

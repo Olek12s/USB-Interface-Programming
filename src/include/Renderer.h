@@ -7,6 +7,14 @@
 
 
 class Renderer {
+public:
+    static void renderBall();
+    static void rendezBlock();
+    static void renderPaddle();
+    static void renderGUI();
+    static void renderPaddleAllowedArea();
+
+private:
 };
 
 
