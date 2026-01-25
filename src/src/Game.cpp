@@ -9,10 +9,16 @@
 #include <chrono>
 #include <iostream>
 
-std::vector<std::vector<Block>> Game::blocks;
-
-std::vector<std::vector<Block> > Game::getBlocks() {
+std::vector<std::vector<Block>>& Game::getBlocks() {
     return blocks;
+}
+
+Game::Game() {
+    pending = false;
+    score = 0;
+    highScore = 0;
+    Block::setWidth(blockWidth);
+    Block::setHeight(blockHeight);
 }
 
 /**
@@ -53,6 +59,10 @@ sf::View Game::getLetterboxView(sf::View view, float windowWidth, float windowHe
     //view.setViewport(sf::Rect<float>({posX, posY}, {sizeX, sizeY}));
     view.setViewport({{posX, posY}, {sizeX, sizeY}});
     return view;
+}
+
+float Game::getBlockDeclinationSpeed() {
+    return blockDeclinationSpeed;
 }
 
 

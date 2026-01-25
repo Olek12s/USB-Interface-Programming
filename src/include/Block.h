@@ -12,14 +12,17 @@ public:
     Block(sf::Vector2f pos);
     static float getWidth();
     static float getHeight();
+    static void setWidth(float w);
+    static void setHeight(float h);
     int getHealth();
     sf::Vector2f getPosition();
     void render();
+    void tick();
 
 private:
     sf::Vector2f pos;
-    static float w;
-    static float h;
+    static inline float w;
+    static inline float h;
     int health;
 };
 

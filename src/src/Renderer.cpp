@@ -16,9 +16,8 @@ sf::View Renderer::view;
 
 void Renderer::createWindow(unsigned int width, unsigned int height, const std::string& title)
 {
-
     window.create(sf::VideoMode({width, height}), title);
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(250);
 }
 
 sf::RenderWindow& Renderer::getWindow()
