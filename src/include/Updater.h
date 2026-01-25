@@ -5,7 +5,7 @@
 #ifndef UPDATER_H
 #define UPDATER_H
 
-
+#include "SFML/Window/Mouse.hpp"
 
 class Updater {
 public:

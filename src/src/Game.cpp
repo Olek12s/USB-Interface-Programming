@@ -65,6 +65,12 @@ float Game::getBlockDeclinationSpeed() {
     return blockDeclinationSpeed;
 }
 
+float Game::getViewWidth() {
+    return viewWidth;
+}
+float Game::getViewHeight() {
+    return viewHeight;
+}
 
 void Game::start() {
     generate();
@@ -74,6 +80,17 @@ bool Game::isPending() {
     return pending;
 }
 
+
+float Game::getBlockYBorder() {
+    return blocksBottomYBorder;
+}
+
+float Game::getPaddleYBorder() {
+    return paddleBottomYBorder;
+}
+
+Paddle& Game::getPaddle() {return paddle;}
+Ball& Game::getBall() {return ball;}
 
 void Game::generate() {
     blocks.clear();

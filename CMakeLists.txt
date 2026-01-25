@@ -26,7 +26,9 @@ add_executable(main src/src/main.cpp
         src/src/Updater.cpp
         src/include/Updater.h
         src/src/Game.cpp
-        src/include/Game.h)
+        src/include/Game.h
+        src/src/Input.cpp
+        src/include/Input.h)
 target_compile_features(main PRIVATE cxx_std_17)
 target_link_libraries(main PRIVATE SFML::Graphics)
 

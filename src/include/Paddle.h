@@ -4,15 +4,25 @@
 
 #ifndef PADDLE_H
 #define PADDLE_H
-
-
+#include "SFML/System/Vector2.hpp"
 
 class Paddle {
 public:
+    Paddle();
+
     void move(float xd, float yd);
     void render();
+    float getWidth();
+    float getHeight();
+    void setPosition(sf::Vector2f p);
+    sf::Vector2f getPosition();
 
 private:
+    sf::Vector2f pos;
+    float width = 140.f;
+    float height = 18.f;
+    float maxVelovityXY = 25.f;
+
     bool moveX(float xd);
     bool moveY(float yd);
 };

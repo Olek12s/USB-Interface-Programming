@@ -9,6 +9,7 @@
 #include "SFML/Graphics/Color.hpp"
 #include "../include/RoundedRectangleShape.h"
 #include "../include/Game.h"
+#include "SFML/Graphics/CircleShape.hpp"
 #include "SFML/Graphics/RectangleShape.hpp"
 
 sf::RenderWindow Renderer::window;
@@ -41,19 +42,70 @@ void Renderer::globalRender() {
     window.draw(bgRect);
 
     // Render all blocks
-    for (auto& row : Game::getBlocks())
-        for (auto& block : row)
+    for (auto& row : Game::getBlocks()) {
+        for (auto& block : row) {
             renderBlock(block);
+        }
+    }
+
+    renderPaddleAllowedArea();
+    renderBlocksBorder();
+    renderPaddle(Game::getPaddle());
+    Renderer::renderBall(Game::getBall());
 }
+
+void Renderer::renderPaddle(Paddle& paddle) {
+    sf::RectangleShape rect;
+
+    rect.setSize({paddle.getWidth(), paddle.getHeight()});
+    rect.setPosition(paddle.getPosition());
+    rect.setFillColor(sf::Color(200, 200, 200));
+
+    window.draw(rect);
+}
+
+void Renderer::renderBall(Ball& ball) {
+    sf::CircleShape c(ball.getRadius());
+
+    c.setOrigin({ball.getRadius(), ball.getRadius()}); // middle of the ball
+    c.setPosition(ball.getPosition());
+    c.setFillColor(sf::Color::White);
+    window.draw(c);
+}
+
 
 void Renderer::renderBlock(Block& block) {
     //sf::RoundedRectangleShape rect;
     sf::RectangleShape rect;
     rect.setSize({Block::getWidth(), Block::getHeight()});
     rect.setPosition(block.getPosition());
-    if (block.getHealth() == 3) rect.setFillColor(sf::Color::Red);
+    if (block.getHealth() == 3) rect.setFillColor(sf::Color::Green);
     else if (block.getHealth() == 2) rect.setFillColor(sf::Color::Yellow);
-    else rect.setFillColor(sf::Color::Green);
+    else rect.setFillColor(sf::Color::Red);
     window.draw(rect);
 }
+
+void Renderer::renderPaddleAllowedArea() {
+    sf::RectangleShape rect;
+
+    float height = Game::getPaddleYBorder();
+    float y = view.getSize().y - height;
+
+    rect.setPosition({0.f, y});
+    rect.setSize({view.getSize().x, height});
+    rect.setFillColor(sf::Color(0, 0, 128, 180));
+    window.draw(rect);
+}
+
+void Renderer::renderBlocksBorder() {
+    sf::RectangleShape line;
+
+    float height = view.getSize().y - Game::getBlockYBorder();
+    float thickness = 4.f;
+    line.setPosition({0.f, height - thickness/2.f}); // centering line in Y axis
+    line.setSize({view.getSize().x, thickness});
+    line.setFillColor(sf::Color(128, 0, 0, 200));
+    window.draw(line);
+}
+
 

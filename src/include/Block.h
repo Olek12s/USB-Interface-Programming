@@ -16,6 +16,8 @@ public:
     static void setHeight(float h);
     int getHealth();
     sf::Vector2f getPosition();
+    bool isAlive();
+    void hit();
     void render();
     void tick();
 
@@ -24,6 +26,7 @@ private:
     static inline float w;
     static inline float h;
     int health;
+    bool alive;
 };
 
 
