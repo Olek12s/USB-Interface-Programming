@@ -9,11 +9,17 @@
 
 class Block {
 public:
+    Block(sf::Vector2f pos);
+    static float getWidth();
+    static float getHeight();
+    int getHealth();
+    sf::Vector2f getPosition();
     void render();
 
 private:
     sf::Vector2f pos;
-    static int w, h;
+    static float w;
+    static float h;
     int health;
 };
 
