@@ -70,35 +70,62 @@ void Game::start() {
     generate();
 }
 
+bool Game::isPending() {
+    return pending;
+}
+
+
 void Game::generate() {
     blocks.clear();
 
-    constexpr int ROWS = 5;
-    constexpr float START_Y = 60.f;
-    constexpr float PADDING = 5.f;
+    float blockWidthAdjusted = (viewWidth - (blocksInRow - 1) * PADDING) / blocksInRow;
+    Block::setWidth(blockWidthAdjusted);
+    Block::setHeight(blockHeight);
 
-    const float totalWidth = blocksInRow * Block::getWidth() +
-                             (blocksInRow - 1) * PADDING;
+    float startX = 0.f;
 
-    const float startX = (1366.f - totalWidth) / 2.f;
-
-    for (int row = 0; row < ROWS; row++)
+    for (int row = 0; row < rowsAtStart; row++)
     {
         std::vector<Block> line;
 
         for (int col = 0; col < blocksInRow; col++)
         {
-            float x = startX + col * (Block::getWidth() + PADDING);
-            float y = START_Y + row * (Block::getHeight() + PADDING);
-
-
+            float x = startX + col * (blockWidthAdjusted + PADDING);
+            float y = row * (blockHeight + PADDING);
             line.emplace_back(sf::Vector2f(x, y));
         }
-
         blocks.push_back(line);
     }
-
     pending = true;
+}
+
+void Game::generateNewRow() {
+    float blockWidthAdjusted = (viewWidth - (blocksInRow - 1) * PADDING) / blocksInRow;
+    Block::setWidth(blockWidthAdjusted);
+    Block::setHeight(blockHeight);
+
+    float rowHeight = blockHeight + PADDING;
+
+
+    // Y above previous row
+    float newRowY = 0.f; // no rows yet
+    if (!blocks.empty()) {
+        newRowY = blocks[0][0].getPosition().y - rowHeight;
+    }
+
+    // generate new row
+    std::vector<Block> newRow;
+    for (int col = 0; col < blocksInRow; col++) {
+        float x = col * (blockWidthAdjusted + PADDING);
+        newRow.emplace_back(sf::Vector2f(x, newRowY));
+    }
+
+    // insert new row into the beggining
+    blocks.insert(blocks.begin(), std::move(newRow));
+}
+
+float Game::getPadding() {
+    return PADDING;
 }
 
 
@@ -107,16 +134,13 @@ void Game::mainLoop()
     constexpr int TARGET_TPS = 60;
     const double nsPerTick = 1'000'000'000.0 / TARGET_TPS;
 
-   // sf::RenderWindow window(sf::VideoMode({1366, 768}), "Breakout");
-   // Renderer::setWindow(window);
-   // window.setVerticalSyncEnabled(false);
-    Renderer::createWindow(1366, 768, "Breakout");
+    Renderer::createWindow(viewWidth, viewHeight, "Breakout");
 
     // --- LETTERBOX VIEW ---
     sf::View mainView;
-    mainView.setSize({1366.f, 768.f});  //TODO: tidy
-    mainView.setCenter({1366.f/2, 768.f/2});
-    mainView = getLetterboxView(mainView, 1366.f, 768.f);
+    mainView.setSize({viewWidth, viewHeight});  //TODO: tidy
+    mainView.setCenter({viewWidth/2.f, viewHeight/2.f});
+    mainView = getLetterboxView(mainView, viewWidth, viewHeight);
     Renderer::setView(mainView);
 
     using clock = std::chrono::high_resolution_clock;
@@ -160,7 +184,7 @@ void Game::mainLoop()
 
         while (accumulator >= 1.0)
         {
-            if (pending)
+            //if (pending)
             {
                 //input.listen();
                  Updater::globalTick();
