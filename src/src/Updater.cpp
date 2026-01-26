@@ -53,8 +53,23 @@ void Updater::globalTick() {
     Ball& ball = Game::getBall();
     ball.tick();
 
+    bool blockReachedBorder = false;
+    float borderY = Game::getViewHeight() - Game::getBlockYBorder();
+
+    for (auto& row : blocks) {
+        for (auto& block : row) {
+            float blockBottom = block.getPosition().y + Block::getHeight();
+
+            if (blockBottom >= borderY) {
+                blockReachedBorder = true;
+                break;
+            }
+        }
+        if (blockReachedBorder) break;
+    }
+
     // if ball was lost or any block reached block border - game over
-    if (ball.getPosition().y - ball.getRadius() > Game::getViewHeight()) {
+    if (ball.getPosition().y - ball.getRadius() > Game::getViewHeight() || blockReachedBorder) {
         std::cout << "game over\n";
         Game::restart();
         Game::setPending(false);

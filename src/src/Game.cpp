@@ -81,6 +81,7 @@ void Game::restart() {
     paddle.setPosition({paddle.getStartingPosition()});    // set paddle position on the middle
     ball.setPosition(Ball::getDefaultPos());
     ball.setDir(Ball::getDefaultDir());
+    resetScore();
 }
 
 
@@ -89,6 +90,16 @@ bool Game::isPending() {
 }
 
 void Game::setPending(bool pend) {pending = pend;}
+
+int Game::getScore() {return score;}
+int Game::getHighScore() {return highScore;}
+
+void Game::addScore(int s) {
+    score += s;
+    if (score > highScore) highScore = score;
+}
+void Game::resetScore() {score = 0;}
+void Game::setHighScore(int s) {highScore = s;}
 
 float Game::getBlockYBorder() {
     return blocksBottomYBorder;

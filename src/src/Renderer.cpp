@@ -10,7 +10,9 @@
 #include "../include/RoundedRectangleShape.h"
 #include "../include/Game.h"
 #include "SFML/Graphics/CircleShape.hpp"
+#include "SFML/Graphics/Font.hpp"
 #include "SFML/Graphics/RectangleShape.hpp"
+#include "SFML/Graphics/Text.hpp"
 
 sf::RenderWindow Renderer::window;
 sf::View Renderer::view;
@@ -19,6 +21,10 @@ void Renderer::createWindow(unsigned int width, unsigned int height, const std::
 {
     window.create(sf::VideoMode({width, height}), title);
     window.setFramerateLimit(60);
+
+    if (!font.openFromFile("arial.ttf")) {
+        std::cout << "Failed to load font\n";
+    }
 }
 
 sf::RenderWindow& Renderer::getWindow()
@@ -52,7 +58,32 @@ void Renderer::globalRender() {
     renderBlocksBorder();
     renderPaddle(Game::getPaddle());
     Renderer::renderBall(Game::getBall());
+    renderGUI();
 }
+
+void Renderer::renderGUI() {
+    sf::Text highScoreText(font);
+    sf::Text scoreText(font);
+
+    highScoreText.setCharacterSize(40);
+    scoreText.setCharacterSize(40);
+    highScoreText.setOutlineThickness(2);
+    scoreText.setOutlineThickness(2);
+
+    sf::Color textColor = sf::Color{10, 25, 230};
+    highScoreText.setFillColor(textColor);
+    scoreText.setFillColor(textColor);
+
+    highScoreText.setString("Highscore: " + std::to_string(Game::getHighScore()));
+    scoreText.setString("Score: " + std::to_string(Game::getScore()));
+
+    highScoreText.setPosition({10.f, 5.f});
+    scoreText.setPosition({10.f, 45.f});
+
+    window.draw(highScoreText);
+    window.draw(scoreText);
+}
+
 
 void Renderer::renderPaddle(Paddle& paddle) {
     sf::RectangleShape rect;

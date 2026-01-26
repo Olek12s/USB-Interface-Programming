@@ -9,6 +9,7 @@
 #include "Paddle.h"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "SFML/Window/Window.hpp"
+#include <SFML/Graphics/Font.hpp>
 
 
 class Renderer {
@@ -27,6 +28,7 @@ public:
 private:
     static sf::RenderWindow window;
     static sf::View view;
+    static inline sf::Font font;
 };
 
 

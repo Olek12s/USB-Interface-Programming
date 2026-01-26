@@ -32,14 +32,19 @@ public:
     static float getBlockYBorder();
     static float getViewWidth();
     static float getViewHeight();
+    static int getScore();
+    static int getHighScore();
+    static void addScore(int s);
+    static void resetScore();
+    static void setHighScore(int s);
 
 private:
     static inline float viewWidth = 1366.f;
     static inline float viewHeight = 768.f;
 
     static inline bool pending = false;   // game ticks only when pending true
-    int score;
-    int highScore;
+    static inline int score = 0;
+    static inline int highScore = 0;
     static inline int seed;
 
     // block settings

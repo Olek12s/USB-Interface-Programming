@@ -25,8 +25,10 @@ void Block::render() {
 
 void Block::hit() {
     health = std::max(0, health - 1);
+    Game::addScore(1);  // 1 for hit
     if (health == 0) {
         alive = false;  // marked to be removed on next tick
+        Game::addScore(3); // 3 extra for destroyed
     }
 }
 
