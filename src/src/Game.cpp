@@ -3,6 +3,7 @@
 //
 
 #include "../include/Game.h"
+#include "../include/Input.h"
 #include "../include/Updater.h"
 #include "../include/Renderer.h"
 #include <SFML/Graphics.hpp>
@@ -155,7 +156,7 @@ void Game::mainLoop()
 
     // --- LETTERBOX VIEW ---
     sf::View mainView;
-    mainView.setSize({viewWidth, viewHeight});  //TODO: tidy
+    mainView.setSize({viewWidth, viewHeight});
     mainView.setCenter({viewWidth/2.f, viewHeight/2.f});
     mainView = getLetterboxView(mainView, viewWidth, viewHeight);
     Renderer::setView(mainView);
@@ -203,8 +204,8 @@ void Game::mainLoop()
         {
             //if (pending)
             {
-                //input.listen();
-                 Updater::globalTick();
+                Input::update();
+                Updater::globalTick();
             }
 
             ticksThisSecond++;
@@ -225,7 +226,7 @@ void Game::mainLoop()
             framesThisSecond = 0;
             lastSecond = now;
 
-            std::cout << "TPS: " << currentTPS<< " | FPS: " << currentFPS << std::endl;
+            //std::cout << "TPS: " << currentTPS<< " | FPS: " << currentFPS << std::endl;
         }
     }
 }
