@@ -18,8 +18,8 @@ public:
     static std::vector<std::vector<Block>>& getBlocks();
     static Paddle& getPaddle();
     static Ball& getBall();
-    void restart();
-    void start();
+    static void restart();
+    static void start();
     static void generate();        // generate whole new starting setup of Blocks
     static void generateNewRow();  // generate single row of blocks
     void mainLoop();
@@ -27,24 +27,30 @@ public:
     static float getBlockDeclinationSpeed();
     static float getPadding();
     static bool isPending();
+    static void setPending(bool pending);
     static float getPaddleYBorder();
     static float getBlockYBorder();
     static float getViewWidth();
     static float getViewHeight();
+    static int getScore();
+    static int getHighScore();
+    static void addScore(int s);
+    static void resetScore();
+    static void setHighScore(int s);
 
 private:
     static inline float viewWidth = 1366.f;
     static inline float viewHeight = 768.f;
 
     static inline bool pending = false;   // game ticks only when pending true
-    int score;
-    int highScore;
+    static inline int score = 0;
+    static inline int highScore = 0;
     static inline int seed;
 
     // block settings
     static inline std::vector<std::vector<Block>> blocks;
     static inline Paddle paddle;
-    static inline Ball ball = Ball({683.f, 500.f}, {0.6f, -1.f}, 10.f);
+    static inline Ball ball = Ball(Ball::getDefaultPos(), Ball::getDefaultDir());
     static constexpr int blocksInRow = 7;
     static constexpr int rowsAtStart = 7;
     static constexpr int blockInColAtStart = 7;

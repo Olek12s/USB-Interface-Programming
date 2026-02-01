@@ -14,6 +14,7 @@ public:
     void render();
     float getWidth();
     float getHeight();
+    sf::Vector2f getStartingPosition();
     void setPosition(sf::Vector2f p);
     sf::Vector2f getPosition();
 

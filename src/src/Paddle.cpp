@@ -10,9 +10,10 @@
 #include "../include/Game.h"
 
 Paddle::Paddle() {
-    pos = {600.f, 700.f}; // start
+    pos = getStartingPosition(); // start
 }
 
+sf::Vector2f Paddle::getStartingPosition() {return {600.f, 700.f};}
 float Paddle::getWidth() { return width; }
 float Paddle::getHeight() { return height; }
 void Paddle::setPosition(sf::Vector2f p) { pos = p; }
