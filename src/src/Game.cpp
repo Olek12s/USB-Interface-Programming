@@ -193,7 +193,7 @@ void Game::mainLoop()
     int currentFPS = 0;
 
     sf::RenderWindow& window = Renderer::getWindow();
-
+    Input::init();
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())

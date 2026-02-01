@@ -87,9 +87,9 @@ public:
         RightStick  = 10
     };
 
-
-    Input();
-    ~Input();
+    static void init();
+    // Input();
+    // ~Input();
 
     static void enumerateDevices();
     static void update();

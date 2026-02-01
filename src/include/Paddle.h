@@ -15,6 +15,7 @@ public:
     float getWidth();
     float getHeight();
     sf::Vector2f getStartingPosition();
+    float getMaxVelovityXY();
     void setPosition(sf::Vector2f p);
     sf::Vector2f getPosition();
 

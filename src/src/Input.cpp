@@ -4,7 +4,7 @@
 
 #include "../include/Input.h"
 
-Input::Input() {
+void Input::init() {
     HidD_GetHidGuid(&hidGuid);  // get GUID of the HID device class
     enumerateDevices();         // enumerate HID devices and keep only gamepads/joysticks
 
@@ -12,16 +12,28 @@ Input::Input() {
     for(auto& dev : devices) {
         ReadFile(dev.handle, dev.buffer.data(), dev.reportSize, NULL, &dev.ov);
     }
+
+    std::cout << "Input system initialized\n";
 }
 
-Input::~Input() {
-    for(const auto& dev : devices) {
-        CloseHandle(dev.ov.hEvent);
-        CloseHandle(dev.handle);
-        HidD_FreePreparsedData(dev.ppd);
-    }
-    SetupDiDestroyDeviceInfoList(devInfo);
-}
+// Input::Input() {
+//     HidD_GetHidGuid(&hidGuid);  // get GUID of the HID device class
+//     enumerateDevices();         // enumerate HID devices and keep only gamepads/joysticks
+//
+//     // first reads are async
+//     for(auto& dev : devices) {
+//         ReadFile(dev.handle, dev.buffer.data(), dev.reportSize, NULL, &dev.ov);
+//     }
+// }
+
+// Input::~Input() {
+//     for(const auto& dev : devices) {
+//         CloseHandle(dev.ov.hEvent);
+//         CloseHandle(dev.handle);
+//         HidD_FreePreparsedData(dev.ppd);
+//     }
+//     SetupDiDestroyDeviceInfoList(devInfo);
+// }
 
 
 // normalizes stick X or Y value into value in range of [-1, 1]
@@ -190,7 +202,6 @@ void Input::update() {
     for(auto& dev : devices) {
         readInput(dev);
     }
-    std::cout << "upd\n";
     //Sleep(sleepTime);
 }
 

@@ -18,6 +18,7 @@ float Paddle::getWidth() { return width; }
 float Paddle::getHeight() { return height; }
 void Paddle::setPosition(sf::Vector2f p) { pos = p; }
 sf::Vector2f Paddle::getPosition() { return pos; }
+float Paddle::getMaxVelovityXY() {return maxVelovityXY;}
 
 
 void Paddle::move(float xd, float yd)

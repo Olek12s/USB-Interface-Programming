@@ -51,9 +51,9 @@ private:
     static inline std::vector<std::vector<Block>> blocks;
     static inline Paddle paddle;
     static inline Ball ball = Ball(Ball::getDefaultPos(), Ball::getDefaultDir());
-    static constexpr int blocksInRow = 7;
+    static constexpr int blocksInRow = 5;
     static constexpr int rowsAtStart = 7;
-    static constexpr int blockInColAtStart = 7;
+    static constexpr int blockInColAtStart = 5;
     static constexpr float blockWidth = 0.f;
     static constexpr float blockHeight = 30.f;
     static constexpr float PADDING = 5.f;
